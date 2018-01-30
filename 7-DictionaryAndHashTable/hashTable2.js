@@ -1,3 +1,9 @@
+/*
+* @Author: zhanghang
+* @Date:   2018-01-30 21:31:40
+* @Last Modified by:   zhanghang
+* @Last Modified time: 2018-01-30 21:41:31
+*/
 'use strict'
 function HashTable() {
     var tables = []
@@ -7,15 +13,6 @@ function HashTable() {
             hash += key.charCodeAt(i)
         }
         return hash % 37
-    }
-
-    var djb2HashCode = function (key) {
-    	var hash = 5381
-    	for(var i = 0;i<key.length;i++){
-    		hash = hash *33 +key.charCodeAt(i)
-    	}
-
-    	return hash %1013
     }
 
     var ValuePair = function(key, value) {
@@ -29,28 +26,32 @@ function HashTable() {
     this.put = function(key, value) {
         var position = loseloseHashCode(key)
         if (tables[position] == undefined) {
-            tables[position] = new LinkedList()
+            tables[position] = new ValuePair(key,value)
+        }else {
+            var index = ++position
+            while(tables[index]!==undefined){
+                index++
+            }
+            tables[index] = new ValuePair(key,value)
         }
         // console.log(loseloseHashCode(key), '-', value)
-        tables[position].append(new ValuePair(key, value))
+        // tables[position].append(new VaulePair(key, value))
             // return tables[loseloseHashCode(key)] = value
     }
     this.get = function(key) {
         var position = loseloseHashCode(key)
         if (tables[position] !== undefined) {
-
-            // 遍历链表来寻找键/值
-            var current = tables[position].getHead()
-
-            while (current.next) {
-                if (current.element.key === key) {
-                    return current.element.value
+            if (tables[position].key===key) {
+                return tables[position].value
+            }else {
+                var index = ++position
+                // 这一行不太明白  ===undefined是多余的吗？
+                while(tables[index]===undefined||tables[index].key!==key){
+                    index ++
                 }
-                current = current.next
-            }
-            // 检查元素在链表第一个或最后一个节点的情况
-            if (current.element.key === key) {
-                return current.element.value
+                if (tables[index].key===key) {
+                    return tables[index].value
+                }
             }
         }
 
@@ -60,34 +61,7 @@ function HashTable() {
 
     this.remove = function(key) {
         // delete tables[loseloseHashCode(key)]
-        // tables[loseloseHashCode(key)] = undefined
-        var position = loseloseHashCode(key)
-        var current = tables[position].getHead()
-        if (tables[position] !== undefined) {
-
-            while (current.next) {
-                if (current.element.key === key) {
-                    tables[position].remove(current.element)
-                    if (tables[position].isEmpty()) {
-                        tables[position] = undefined
-                    }
-                    return true
-                }
-
-                current = current.next                
-            }
-
-            // 检查是否为第一个或最后一个元素
-            if(current.element.key===key){
-            	tables[position].remove(current.element)
-            	if (tables[position].isEmpty()) {
-                        tables[position] = undefined
-                    }
-                    return true
-            }
-        }
-
-        return false
+        tables[loseloseHashCode(key)] = undefined
     }
 
     this.print = function() {
