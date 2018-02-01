@@ -61,6 +61,7 @@ function BinarySearchTree() {
 		}
 	}
 
+	// 中序遍历
 	this.inOrderTraverse = function(callback) {
 		// 我的实现方式
 		// consoleAnNode(root)
@@ -69,6 +70,15 @@ function BinarySearchTree() {
 		inOrderTraverseNode(root, callback)
 
 
+	}
+	// 后序遍历
+	this.postOrderTraverse = function(callback) {
+		postOrderTraverseNode(root, callback)
+	}
+
+	// 先序遍历
+	this.preOrderTraverse = function(callback) {
+		preOrderTraverseNode(root, callback)
 	}
 
 	var inOrderTraverseNode = function(node, callback) {
@@ -79,7 +89,21 @@ function BinarySearchTree() {
 		}
 	}
 
+	var preOrderTraverseNode = function(node, callback) {
+		if (node !== null) {
+			callback(node.key)
+			preOrderTraverseNode(node.left, callback)
+			preOrderTraverseNode(node.right, callback)
+		}
+	}
 
+	var postOrderTraverseNode = function(node, callback) {
+		if (node !== null) {
+			postOrderTraverseNode(node.left, callback)
+			postOrderTraverseNode(node.right, callback)
+			callback(node.key)
+		}
+	}
 
 	function consoleAnNode(node) {
 		if (node) {
@@ -98,10 +122,172 @@ function BinarySearchTree() {
 	this.getRoot = function() {
 		return root
 	}
+
+	// this.min = function() {
+	// 	var current = root
+	// 	while (current.left) {
+	// 		current = current.left
+	// 	}
+
+	// 	return current ? current.key : 'no root'
+	// }
+
+	// this.max = function() {
+	// 	var current = root
+	// 	while (current.right) {
+	// 		current = current.right
+	// 	}
+
+	// 	return current ? current.key : 'no root'
+	// }
+
+	this.min = function() {
+		return minNode(root)
+	}
+
+	var minNode = function(node) {
+		if (node) {
+			while (node && node.left !== null) {
+				node = node.left
+			}
+
+			return node.key
+		}
+
+		return null
+	}
+
+	this.max = function() {
+		return maxNode(root)
+	}
+
+	var maxNode = function(node) {
+		if (node) {
+			while (node && node.right !== null) {
+				node = node.right
+			}
+
+			return node.key
+		}
+
+		return null
+	}
+
+	// this.find = function(key) {
+	// 	if (!root) {
+	// 		return false
+	// 	}
+	// 	return findNode(key, root)
+	// }
+
+	// var findNode = function(key, node) {
+	// 	if (node) {
+	// 		if (key === node.key) {
+	// 			return node
+	// 		}
+
+	// 		if (key > node.key) {
+	// 			return findNode(key, node.right)
+	// 		}
+
+	// 		if (key < node.key) {
+	// 			return findNode(key, node.left)
+	// 		}
+	// 	}
+
+	// 	return false
+	// }
+
+	this.search = function(key) {
+		return searchNode(root, key)
+	}
+
+	var searchNode = function(node, key) {
+		if (node === null) {
+			return false
+		}
+		if (key < node.key) {
+			return searchNode(node.left, key)
+		}
+		if (key > node.key) {
+			return searchNode(node.right, key)
+		}
+		return true
+	}
+
+	// this.remove = function(key) {
+	// 	return removeNode(key)
+	// }
+
+	// var removeNode = function(key) {
+	// 	if (!this.search(key)) {
+	// 		return false
+	// 	}
+
+	// 	var findNode = node
+
+	// }
+
+	this.remove = function(key) {
+		root = removeNode(root, key)
+	}
+
+	// 很好的学习递归的地方
+	var removeNode = function(node, key) {
+		if (node === null) {
+			return null
+		}
+
+		if (key < node.key) {
+			node.left = removeNode(node.left, key)
+			return node
+		}
+
+		if (key > node.key) {
+			node.right = removeNode(node.right, key)
+
+			return node
+		}
+
+		// 第一种情况--一个叶节点
+		if (node.left === null && node.right === null) {
+			node = null
+			return node
+		}
+
+		// 第二种情况--一个只有一个子节点的节点
+		if (node.left === null && node.right) {
+			node = node.right
+			return node
+		}
+
+		if (node.left && node.right === null) {
+			node = node.left
+			return node
+		}
+
+		// 第三种情况--一个有两个子节点的节点
+		var aux = findMinNode(node.right)
+		node.key = aux.key
+		node.right = removeNode(node.right, aux.key)
+		return node
+	}
+
+	var findMinNode = function(node) {
+		while (node && node.left !== null) {
+			node = node.left
+		}
+
+		return node
+	}
+
+
+
 }
 
 var bst = new BinarySearchTree()
 
+bst.insert(11)
 bst.insert(7)
 bst.insert(15)
 bst.insert(5)
@@ -118,8 +304,15 @@ bst.insert(25)
 bst.insert(6)
 // console.log(bst.getRoot())
 // console.log(bst.getRoot().right)
-bst.inOrderTraverse(printNode)
+// bst.postOrderTraverse(printNode)
 
 function printNode(value) {
 	console.log(value)
 }
+// console.log(bst.min())
+// console.log(bst.max())
+
+console.log(bst.search(10))
+console.log(bst.search(11))
+bst.remove(11)
+bst.postOrderTraverse(printNode)
