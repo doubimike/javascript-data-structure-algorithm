@@ -53,3 +53,32 @@ var isAnagram = function(s, t) {
 
 	return s == t;
 };
+
+
+var isAnagram = function(s, t) {
+	var len = s.length
+	if (len !== t.length) {
+		return false
+	}
+
+	var bitMap = new Array(26).fill(0)
+
+	for (var i = 0; i < len; i++) {
+		bitMap[s.charCodeAt(i) - 'a'.charCodeAt(0)]++
+	}
+
+	for (var i = 0; i < len; i++) {
+		if (bitMap[t.charCodeAt(i) - 'a'.charCodeAt(0)] < 0) {
+			console.log('bitMap', bitMap)
+			return false
+		} else {
+
+			bitMap[t.charCodeAt(i) - 'a'.charCodeAt(0)]--
+		}
+	}
+	console.log('bitMap', bitMap)
+	return true
+
+}
+
+console.log(isAnagram('abcbb', 'cbaaa'))
