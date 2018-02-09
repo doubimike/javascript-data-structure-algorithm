@@ -1,9 +1,9 @@
 /*
-* @Author: zhanghang
-* @Date:   2018-02-08 22:21:32
-* @Last Modified by:   zhanghang
-* @Last Modified time: 2018-02-08 23:40:32
-*/
+ * @Author: zhanghang
+ * @Date:   2018-02-08 22:21:32
+ * @Last Modified by:   mike.zhang
+ * @Last Modified time: 2018-02-09 09:52:48
+ */
 // The count-and-say sequence is the sequence of integers with the first five terms as following:
 
 // 1.     1
@@ -35,43 +35,88 @@
 // 21    讀做 1個2 1個1，得到1211
 // 1211  1個1，1個2，2個1  111221  
 
+
+// 基本用的递归
 /**
  * @param {number} n
  * @return {string}
  */
-var countAndSay = function (n) {
-    if (n==1) {
+var countAndSay = function(n) {
+
+    if (n == 1) {
         return '1'
     }
-    if (n==2) {
+    if (n == 2) {
         return '11'
     }
 
-    var prev = countAndSay(n-1)
+    var prev = countAndSay(n - 1)
+    console.log('prev', prev)
     var str = prev[0]
     var i = 1
     var count = 1
     var result = ''
-    while(i<prev.length){
-        if (prev[i]===prev[i-1]) {
+    while (i < prev.length) {
+        console.log('iiii', i)
+        if (prev[i] === prev[i - 1]) {
+            console.log('prev', prev)
+            console.log('preve', prev[i])
+            console.log('preve', prev[i - 1])
             count++
-            if (i===(prev.length-1)) {
-                result =result+ count+str
+            console.log('enter')
+            if (i === (prev.length - 1)) {
+                result = result + count + str
+                console.log('resulteee', result)
             }
-        }else {
-            result = result +  count +str
+        } else {
+            console.log('elet')
+            result = result + count + str
+            console.log('result', result)
             str = prev[i]
+            console.log('newstr', str)
             count = 1
-            if (i===(prev.length-1)) {
-                result = result +count+str
+            if (i === (prev.length - 1)) {
+                result = result + count + str
             }
         }
-        i++       
+        i++
+        console.log('iafter', i)
     }
 
 
     return result
-    
+    // if (n==1) {
+    //     return '1'
+    // }
+    // if (n==2) {
+    //     return '11'
+    // }
+
+    // var prev = countAndSay(n-1)
+    // var str = prev[0]
+    // var i = 1
+    // var count = 1
+    // var result = ''
+    // while(i<prev.length){
+    //     if (prev[i]===prev[i-1]) {
+    //         count++
+    //         if (i===(prev.length-1)) {
+    //             result =result+ count+str
+    //         }
+    //     }else {
+    //         result = result +  count +str
+    //         str = prev[i]
+    //         count = 1
+    //         if (i===(prev.length-1)) {
+    //             result = result +count+str
+    //         }
+    //     }
+    //     i++       
+    // }
+
+
+    // return result
+
 }
 
 

@@ -1,9 +1,9 @@
 /*
-* @Author: zhanghang
-* @Date:   2018-02-08 22:27:00
-* @Last Modified by:   zhanghang
-* @Last Modified time: 2018-02-08 23:39:14
-*/
+ * @Author: zhanghang
+ * @Date:   2018-02-08 22:27:00
+ * @Last Modified by:   mike.zhang
+ * @Last Modified time: 2018-02-09 09:52:37
+ */
 // 思路
 // 相信這題很多人跟我一樣，看懂題目後就覺得簡單了，直接看下面的code就行。
 
@@ -38,50 +38,42 @@
 // 10.     13211311123113112211
 
 // To generate the nth term, just count and say the n-1th term.
-var countAndSay = function (n) {
-    if (n==1) {
-        return '1'
-    }
-    if (n==2) {
-        return '11'
-    }
 
-    var prev = countAndSay(n-1)
-    console.log('prev',prev)
-    var str = prev[0]
-    var i = 1
-    var count = 1
+
+// 这里用的循环代替递归
+var countAndSay = function(n) {
+    var idx = 1
+    var result = '1'
+    while (idx !== n) {
+        result = countString(result)
+            ++idx
+    }
+    return result
+}
+
+var countString = function(string) {
     var result = ''
-    while(i<prev.length){
-        console.log('iiii',i)
-        if (prev[i]===prev[i-1]) {
-            console.log('prev',prev)
-            console.log('preve',prev[i])
-            console.log('preve',prev[i-1])
-            count++
-            console.log('enter')
-            if (i===(prev.length-1)) {
-                result =result+ count+str
-                console.log('resulteee',result)
+    var num = null
+    var count = 0
+    for (var i = 0; i < string.length; i++) {
+        var value = string.charAt(i)
+        if (value !== num) {
+            if (num !== null && count) {
+                result += (count + num)
             }
-        }else {
-            console.log('elet')
-            result = result +  count +str
-            console.log('result',result)
-            str = prev[i]
-            console.log('newstr',str)
+            num = value
             count = 1
-            if (i===(prev.length-1)) {
-                result = result +count+str
-            }
+        } else {
+            ++count
         }
-        i++       
-        console.log('iafter',i)
-    }
 
+        if (i === string.length - 1) {
+            result += (count + num)
+        }
+    }
 
     return result
-    
+
 }
 
 
