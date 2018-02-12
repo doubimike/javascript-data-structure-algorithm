@@ -34,3 +34,11 @@ var reverseList = function(head) {
 	}
 	return prev
 }
+
+// * 給一個linked list = [1,2,3,4]。 執行while前，prev = head = [1,2,3,4] ;  cur  = head.next = [2,3,4] 
+// * 來看看prev，我們只需要[1]，後面的[2,3,4]都必須移除，prev.next=null，prev = [1]
+// * 第一次進入while， temp = cur = [2,3,4]。 這時候要讓cur指向[3,4]，不然對temp的操作也會影響到cur
+// * 這邊我們需要只留下[2]而不是[2,3,4]，temp.next = null ； temp = [2] 
+// * 將prev接到temp後面，temp.next = prev； temp = [2,1]； cur = [3,4]
+// * 交換完成，temp變成新的prev，prev = temp， prev = [2,1]
+// * 重複以上步驟，值到反轉完成。
