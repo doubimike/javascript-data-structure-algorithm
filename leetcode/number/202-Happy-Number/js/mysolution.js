@@ -2,7 +2,7 @@
 * @Author: zhanghang
 * @Date:   2018-02-10 23:18:37
 * @Last Modified by:   zhanghang
-* @Last Modified time: 2018-02-10 23:27:18
+* @Last Modified time: 2018-02-11 00:03:30
 */
 // Write an algorithm to determine if a number is "happy".
 
@@ -28,6 +28,14 @@ var isHappy = function(n) {
 
     for(var i =0;i<s.length;i++){
         sum = Math.pow(s[i],2)
+    }
+
+    if (sum===1) {
+        return true
+    }
+
+    while(sum!==1){
+        
     }
 
 };

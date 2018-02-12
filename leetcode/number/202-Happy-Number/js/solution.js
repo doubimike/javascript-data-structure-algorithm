@@ -2,7 +2,7 @@
 * @Author: zhanghang
 * @Date:   2018-02-10 23:34:19
 * @Last Modified by:   zhanghang
-* @Last Modified time: 2018-02-10 23:39:18
+* @Last Modified time: 2018-02-11 00:09:07
 */
 // 思路
 // 使用一個map儲存計算過的數字，如果目前的數字已經計算過，表示無窮迴圈出現，return false。持續計算到1出現true或是無窮迴圈出現false。
@@ -25,7 +25,7 @@ var isHappy = function (n) {
         // 單純的計算毎一個位數的平方和
         n.toString().split('').forEach(function (v,i) {
             // n===0是单纯重置n
-            if (i===0) {n===0}
+            if (i===0) {n=0}
                 n+= v*v
         })
         n = parseInt(n)
@@ -33,4 +33,8 @@ var isHappy = function (n) {
 
       return n ===1
 }
+
+
+
+console.log(isHappy(23))
 
