@@ -39,7 +39,7 @@ var partition = function(array, left, right) {
 			console.log('aaa', array)
 		}
 	}
-
+	console.log('array', array)
 	console.log('i', i)
 
 	return i
@@ -57,6 +57,10 @@ function swap(array, i, j) {
 // console.log(quickSort([4, 3, 2, 1]))
 // console.log(quickSort([5, 4, 3, 2, 2, 1]))
 // console.log(quickSort([55, 422, 3111, 2232, 12342, 1341, 999]))
-var arr = [5, 1, 3, 4]
-partition(arr, 0, 3)
-console.log(arr)
+// var arr = [5, 1, 3, 4]
+// partition(arr, 0, 3)
+// console.log(arr)
+var arr2 = [2, 8, 6, 8]
+console.log(partition(arr2, 0, 3))
+// console.log(arr2)
+// console.log(quickSort(arr2))

@@ -16,11 +16,12 @@ function struct() {
 			high = array.length - 1,
 			mid, element
 		while (low <= high) {
+			// 中间位置是low+high  我一直以为都是high - low呢
 			mid = Math.floor((low + high) / 2)
 			element = array[mid]
 			if (element < item) {
 				low = mid + 1
-			} else {
+			} else if (element < item) {
 				high = mid - 1
 			} else {
 				return mid
