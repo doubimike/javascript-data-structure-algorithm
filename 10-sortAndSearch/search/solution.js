@@ -9,7 +9,7 @@ function struct() {
 
 		return -1
 	}
-
+	//二分查找法   leetcode 167可以使用
 	this.binnarySearch = function(item) {
 		this.quickSort()
 		var low = 0,
