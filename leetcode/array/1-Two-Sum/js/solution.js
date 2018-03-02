@@ -27,7 +27,7 @@ console.log(twoSum([3, 2, 4], 6))
 
 
 
-var twoSum = function(nums, length) {
+var twoSum = function(nums, target) {
 	var map = {}
 	for (var i = 0; i < nums.length; i++) {
 		var v = nums[i]

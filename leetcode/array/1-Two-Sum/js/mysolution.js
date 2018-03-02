@@ -15,8 +15,9 @@
  */
 
 // 分析  可以不用循环吗？
+// 这是暴力解法
 var twoSum = function(nums, target) {
-	
+
 	for (var i = 0; i < nums.length; i++) {
 		for (var j = i + 1; j < nums.length; j++) {
 			if (nums[i] + nums[j] === target) {
