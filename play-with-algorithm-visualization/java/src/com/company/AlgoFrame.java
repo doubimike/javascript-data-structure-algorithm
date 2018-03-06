@@ -26,7 +26,7 @@ public class AlgoFrame extends JFrame {
     public int getCanvasHeight(){
         return canvasHeight;
     }
-
+    // TODO:设置自己的数据
     private Circle[] cicrles;
     public void render(Circle[] circles){
         this.cicrles = circles;
@@ -53,7 +53,10 @@ public class AlgoFrame extends JFrame {
             AlgoVisHelper.setStrokeWidth(g2d, 1);
             AlgoVisHelper.setColor(g2d, Color.RED);
             for (Circle circle : cicrles) {
+                if (!circle.isFilled)
                 AlgoVisHelper.strokeCircle(g2d, circle.x, circle.y, circle.getR());
+                else
+                    AlgoVisHelper.fillCircle(g2d, circle.x, circle.y, circle.getR());
             }
 
         }
