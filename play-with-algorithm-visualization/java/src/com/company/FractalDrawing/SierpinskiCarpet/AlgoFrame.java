@@ -1,6 +1,7 @@
-package com.company.MineSweeper;
-import java.awt.*;
+package com.company.FractalDrawing.SierpinskiCarpet;
+
 import javax.swing.*;
+import java.awt.*;
 
 public class AlgoFrame extends JFrame {
 
@@ -33,8 +34,8 @@ public class AlgoFrame extends JFrame {
     public int getCanvasHeight() {return canvasHeight;}
 
     // data
-    private MineSweeperData data;
-    public void render(MineSweeperData data) {
+    private FractalData data;
+    public void render(FractalData data) {
         this.data = data;
         repaint();
     }
@@ -60,27 +61,31 @@ public class AlgoFrame extends JFrame {
             g2d.addRenderingHints(hints);
 
             // 具体绘制
-            int w = canvasWidth / data.M();
-            int h = canvasHeight / data.N();
+            drawFractal(g2d, 0, 0, canvasWidth, canvasHeight, 0);
+        }
+        private void drawFractal(Graphics2D g, int x, int y, int w, int h, int depth) {
+            int w_3 = w/3;
+            int h_3 = h/3;
 
-            for (int i = 0 ; i < data.N() ; i ++)
-                for (int j = 0 ; j < data.M() ; j ++) {
-                    if (data.open[i][j]){
-                    if (data.isMine(i, j))
-                        AlgoVisHelper.putImage(g2d, j * w, i * h, MineSweeperData.mineImageURL);
-                    else
-                        AlgoVisHelper.putImage(g2d, j * w, i * h, MineSweeperData.numberImageURL(data.getNumber(i, j)));
-                    }else {
-                        if(data.flags[i][j])
-                            AlgoVisHelper.putImage(g2d, j*w, i*h, MineSweeperData.flagImageURL);
-                    else
-                        AlgoVisHelper.putImage(g2d, j*w, i*h, MineSweeperData.blockImageURL);
+            if(w_3 <= 0 || h_3 <= 0)
+                return;
+
+            if( depth == data.depth ){
+                AlgoVisHelper.setColor(g, AlgoVisHelper.Indigo);
+                AlgoVisHelper.fillRectangle(g, x+w_3, y+h_3, w_3, h_3);
+                return;
+            }
+
+            for(int i = 0 ; i < 3 ; i ++)
+                for(int j = 0 ; j < 3 ; j ++)
+                    if(i == 1 && j == 1){
+                        AlgoVisHelper.setColor(g, AlgoVisHelper.Indigo);
+                        AlgoVisHelper.fillRectangle(g, x+i*w_3, y+j*h_3, w_3, h_3);
                     }
+                    else
+                        drawFractal(g, x+i*w_3, y+j*h_3, w_3, h_3, depth+1);
 
-
-
-
-                }
+            return;
         }
 
         @Override

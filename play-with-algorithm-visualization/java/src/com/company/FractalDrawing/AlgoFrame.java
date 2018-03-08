@@ -1,6 +1,7 @@
-package com.company.MineSweeper;
-import java.awt.*;
+package com.company.FractalDrawing;
+
 import javax.swing.*;
+import java.awt.*;
 
 public class AlgoFrame extends JFrame {
 
@@ -33,8 +34,8 @@ public class AlgoFrame extends JFrame {
     public int getCanvasHeight() {return canvasHeight;}
 
     // data
-    private MineSweeperData data;
-    public void render(MineSweeperData data) {
+    private CircleData data;
+    public void render(CircleData data) {
         this.data = data;
         repaint();
     }
@@ -60,27 +61,19 @@ public class AlgoFrame extends JFrame {
             g2d.addRenderingHints(hints);
 
             // 具体绘制
-            int w = canvasWidth / data.M();
-            int h = canvasHeight / data.N();
-
-            for (int i = 0 ; i < data.N() ; i ++)
-                for (int j = 0 ; j < data.M() ; j ++) {
-                    if (data.open[i][j]){
-                    if (data.isMine(i, j))
-                        AlgoVisHelper.putImage(g2d, j * w, i * h, MineSweeperData.mineImageURL);
-                    else
-                        AlgoVisHelper.putImage(g2d, j * w, i * h, MineSweeperData.numberImageURL(data.getNumber(i, j)));
-                    }else {
-                        if(data.flags[i][j])
-                            AlgoVisHelper.putImage(g2d, j*w, i*h, MineSweeperData.flagImageURL);
-                    else
-                        AlgoVisHelper.putImage(g2d, j*w, i*h, MineSweeperData.blockImageURL);
-                    }
-
-
-
-
+            drawCicle(g2d,data.getStartX(),data.getStartY(),data.getStartR(),0);
+        }
+        private void drawCicle(Graphics2D g,int x,int y,int r,int depth){
+            if (depth==data.getDepth()||r<1) {
+                return ;
+            }
+            if (depth%2==0) {
+                    AlgoVisHelper.setColor(g,AlgoVisHelper.Red);
+                }else {
+                    AlgoVisHelper.setColor(g,AlgoVisHelper.LightBlue);
                 }
+                AlgoVisHelper.fillCircle(g,x,y,r);
+                drawCicle(g,x,y,r-data.getStep(),depth+1);
         }
 
         @Override
