@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/dist/heap/js/HeapClass.js" />
+        <item url="file://$PROJECT_DIR$/dist/heap/js/HeapClassTest.js" />
+        <item url="file://$PROJECT_DIR$/dist/heap/js/test.js" />
+        <item url="file://$PROJECT_DIR$/dist/union-find/js/UnionFind.js" />
+        <item url="file://$PROJECT_DIR$/dist/union-find/js/UnionFind2.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/dist/heap/js/HeapClass.js" />
+      <root url="file://$PROJECT_DIR$/dist/heap/js/HeapClassTest.js" />
+      <root url="file://$PROJECT_DIR$/dist/heap/js/test.js" />
+      <root url="file://$PROJECT_DIR$/dist/union-find/js/UnionFind.js" />
+      <root url="file://$PROJECT_DIR$/dist/union-find/js/UnionFind2.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

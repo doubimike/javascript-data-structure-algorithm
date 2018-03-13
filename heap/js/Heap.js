@@ -1,8 +1,8 @@
 /*
  * @Author: mike.zhang
  * @Date:   2018-03-12 14:48:58
- * @Last Modified by:   zhanghang
- * @Last Modified time: 2018-03-12 21:30:54
+ * @Last Modified by:   mike.zhang
+ * @Last Modified time: 2018-03-13 10:24:20
  */
 function Heap() {
 	var items = []
@@ -54,9 +54,9 @@ function MaxHeap() {
 
 	}
 
-	this.setData = function (dataArr) {
+	this.setData = function(dataArr) {
 		data = dataArr
-		count = dataArr.length-1
+		count = dataArr.length - 1
 	}
 
 	this.shiftDown = function(k) {
@@ -128,9 +128,9 @@ a.insert(52)
 
 
 // a.size()
-var str =''
+var str = ''
 while (!a.isEmpty()) {
-	str = a.extractMax() +' '+ str
+	str = a.extractMax() + ' ' + str
 	// console.log(a.extractMax())
 }
 // console.log(str)
@@ -144,20 +144,20 @@ while (!a.isEmpty()) {
 
 // b.print()
 var arr = []
-for(var i = 0;i<10000000;i++){
-	arr[i]= Math.floor(Math.random()*1000)
+for (var i = 0; i < 10; i++) {
+	arr[i] = Math.floor(Math.random() * 1000)
 }
 
 
-function heapSort (arr) {
-	 var a = new MaxHeap()
-	 for(var i =0;i<arr.length;i++){
-	 	a.insert(arr[i])
-	 }
+function heapSort(arr) {
+	var a = new MaxHeap()
+	for (var i = 0; i < arr.length; i++) {
+		a.insert(arr[i])
+	}
 
-	 for(var i =arr.length-1;i>=0;i--){
-	 	arr[i]= a.extractMax()
-	 }
+	for (var i = arr.length - 1; i >= 0; i--) {
+		arr[i] = a.extractMax()
+	}
 }
 
 // console.log('arr',arr)
@@ -167,15 +167,15 @@ function heapSort2(arr) {
 	var a = new MaxHeap()
 	a.setData([undefined].concat(arr))
 	// 为什么从a.size()/2开始 因为这个是第一个有子节点的 具体看一下视频的动画演示就知道了
-	for(var i =Math.floor(a.size()/2);i>=1;i--){
-	
+	for (var i = Math.floor(a.size() / 2); i >= 1; i--) {
+
 		a.shiftDown(i)
 	}
-	for(var i =a.size()-1;i>=0;i--){
-		 	arr[i]= a.extractMax()
-		 }
-		 var time2 = new Date();
- 	console.log('time',(time2-time1)/1000)
+	for (var i = a.size() - 1; i >= 0; i--) {
+		arr[i] = a.extractMax()
+	}
+	var time2 = new Date();
+	console.log('time', (time2 - time1) / 1000)
 }
 heapSort2(arr)
-// console.log(arr)
+console.log(arr)
